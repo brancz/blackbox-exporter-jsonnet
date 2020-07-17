@@ -2,5 +2,5 @@ all: test
 
 include .bingo/Variables.mk
 
-test:
+test: $(JSONNET) $(KUBEVAL)
 	$(JSONNET) -y test.jsonnet | $(KUBEVAL)
