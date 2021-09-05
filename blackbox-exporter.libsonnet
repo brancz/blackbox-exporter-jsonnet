@@ -1,7 +1,7 @@
 {
   local blackboxExporter = self,
 
-  name:: error 'must set namespace',
+  name:: error 'must set name',
   namespace:: error 'must set namespace',
   version:: error 'must set version',
   image:: error 'must set image',
@@ -39,6 +39,7 @@
     metadata: {
       labels: blackboxExporter.commonLabels,
       name: blackboxExporter.name,
+      namespace: blackboxExporter.namespace,
     },
     data: {
       'blackbox.yaml': std.manifestJsonEx(blackboxExporter.config, '  '),
@@ -51,6 +52,7 @@
     metadata: {
       labels: blackboxExporter.commonLabels,
       name: blackboxExporter.name,
+      namespace: blackboxExporter.namespace,
     },
     spec: {
       ports: [
@@ -71,6 +73,7 @@
     metadata: {
       labels: blackboxExporter.commonLabels,
       name: blackboxExporter.name,
+      namespace: blackboxExporter.namespace,
     },
     spec: {
       replicas: 1,
@@ -100,7 +103,7 @@
               ],
               readinessProbe: {
                 httpGet: {
-                  path: '/health',
+                  path: '/-/healthy',
                   port: 'http',
                 },
               },
