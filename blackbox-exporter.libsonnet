@@ -103,7 +103,7 @@
               ],
               readinessProbe: {
                 httpGet: {
-                  path: '/health',
+                  path: '/-/healthy',
                   port: 'http',
                 },
               },
